@@ -1,9 +1,9 @@
 
 def intent_matching(entity_list):
     # Keywords
-    recharge_issue = ['recharge_issue','topup', 'balance','recharge','recharge card','credit','credit amount']
+    recharge_issue = ['recharge issue','topup', 'balance','recharge','recharge card','credit','credit amount']
     service_failure = ['service failure', 'service','subscribe', 'unsubscribe','alert', 'subscription', 'unsubscription', 'expire']                             # Subscribe/Unsubscribe
-    network_faiulre = ['network_failure','signal strength','disconnect','disconnects', 'signal', 'network', 'coverage', 
+    network_faiulre = ['network failure','signal strength','disconnect','disconnects', 'signal', 'network', 'coverage', 
                         'network coverage']
 
     # Counts
