@@ -4,21 +4,23 @@ from Intent_Matching import intent_matching
 
 def main():
     
-    text = """Hello, I am Jenny from Dialog customer care service. How may I assist you?
-Hello, This is Sam. Today morning I have recharged my mobile with rs 499 reload through your mobile app.
-Ok
-As I was in a hurry. I haven’t waited till I got the confirmation message.
-May I know your problem.
-I haven’t got any topup. My balance is same as previous.
-Sir, can you please tell your mobile number.
-It is 07666666666.
-Sir. It might be due to system malfunction. We will try to fix this.
-It has been 8 hours since my last recharge. But the problem still persists. May I know how much time does soon mean?
-Sir, we are exactly sorry for inconvenience caused to you. But a few of our lines are under repair. The problem might have occurred due to that.
-So when I can expect my problem to be solved?
-We will definitely clear the issue within next hour.
-Okay fine.
-Thanks for contacting with us
+    # Pass the recording to Google speech to text API
+    #file_path = 'Data/Dual_Channel/WhatsApp Audio 2020-04-16 at 13.26.55.wav'
+    #text = sample_recognize(file_path)
+
+    text = """Hello
+Hello. I am Rixy from Dialog service center. How can I help you.
+Yesterday I activated 399 data package. After that I have lost all my credit balance. Earlier I had 500 credit amount.
+What is your mobile number?
+It is 09811111111.
+Could you give me a moment. Let me check out that.
+Okay
+Sir, your problem is solved now. Now you have the data package.
+What about my credit balance?
+You will get your credit amount as a reload within a hour.
+Ok. Thanks
+Thank you.
+
 
 
 """

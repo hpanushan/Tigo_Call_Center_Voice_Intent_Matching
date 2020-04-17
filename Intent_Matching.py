@@ -1,10 +1,13 @@
 
 def intent_matching(entity_list):
     # Keywords
-    recharge_issue = ['recharge issue','topup', 'balance','recharge','recharge card','credit','credit amount']
-    service_failure = ['service failure', 'service','subscribe', 'unsubscribe','alert', 'subscription', 'unsubscription', 'expire']                             # Subscribe/Unsubscribe
-    network_faiulre = ['network failure','signal strength','disconnect','disconnects', 'signal', 'network', 'coverage', 
-                        'network coverage']
+    recharge_issue = ['issue','topup', 'balance','recharge','card','credit','amount','reload',
+                        'card']
+    service_failure = ['failure', 'service','subscribe', 'unsubscribe','alert', 'subscription', 'unsubscription', 
+                        'expire','package', 'data', 'voice','activation','deactivation']                       
+                         # Subscribe/Unsubscribe
+    network_faiulre = ['failure','strength','disconnect','disconnects', 'signal', 'network', 'coverage', 
+                        'coverage', 'connectivity', '2G', '3G', '4G ']
 
     # Counts
     counts = {
@@ -15,22 +18,28 @@ def intent_matching(entity_list):
     
 
     for entity in entity_list:
-        if entity.lower() in recharge_issue:
-            counts['recharge_issue'] += 1
+        entity = entity.lower().split()
+
+        for i in entity:
+            if i in recharge_issue:
+                counts['recharge_issue'] += 1
         
-        elif entity.lower() in service_failure:
-            counts['service_failure'] += 1
+            elif i in service_failure:
+                counts['service_failure'] += 1
 
-        elif entity.lower() in network_faiulre:
-            counts['network_faiulre'] += 1
+            elif i in network_faiulre:
+                counts['network_faiulre'] += 1
 
-        else: pass
+            else: pass
     
     # Selecting the case with maximum value
-    max_count =  max(counts.values())           
+    max_count =  max(counts.values())   
+
+    # Calculating the threshold
+    threshold = max_count * 0.5        
     
     # Checking the cases with max value
-    issues = [k for k,v in counts.items() if v == max_count]
+    issues = [k for k,v in counts.items() if v >= threshold]
 
     return issues
 
