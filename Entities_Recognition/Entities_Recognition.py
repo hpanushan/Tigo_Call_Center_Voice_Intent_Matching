@@ -61,10 +61,10 @@ def sample_analyze_entities(text_content):
     return entities
 # [END language_entities_text]
 
-def main():
-    text = "Google, headquartered in Mountain View (1600 Amphitheatre Pkwy, Mountain View, CA 940430)"
-    entities = sample_analyze_entities(text)
-    print(entities)
+#def main():
+#    text = "Google, headquartered in Mountain View (1600 Amphitheatre Pkwy, Mountain View, CA 940430)"
+#    entities = sample_analyze_entities(text)
+#    print(entities)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
