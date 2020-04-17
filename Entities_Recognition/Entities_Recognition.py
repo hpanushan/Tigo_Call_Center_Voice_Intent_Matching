@@ -59,6 +59,7 @@ def sample_analyze_entities(text_content):
         entities.append(entity.name)
     
     return entities
+# [END language_entities_text]
 
 def main():
     text = "Google, headquartered in Mountain View (1600 Amphitheatre Pkwy, Mountain View, CA 940430)"

@@ -35,7 +35,7 @@ def sample_recognize(local_file_path):
     Args:
       local_file_path Path to local audio file, e.g. /path/audio.wav
     """
-
+    text = ''
     client = speech_v1.SpeechClient()
 
     # local_file_path = 'resources/hello.wav'
@@ -64,21 +64,16 @@ def sample_recognize(local_file_path):
     for result in response.results:
         # First alternative is the most probable result
         alternative = result.alternatives[0]
-        print(alternative.transcript)
+        text = text +  alternative.transcript + '\n'
 
-
+    return text
 # [END speech_transcribe_enhanced_model]
 
 
 def main():
-    import argparse
-
-    #parser = argparse.ArgumentParser()
-    #parser.add_argument("--local_file_path", type=str, default="resources/hello.wav")
-    #args = parser.parse_args()
-
-    sample_recognize("Data/Dual_Channel/WhatsApp Audio 2020-04-16 at 13.26.55.wav")
-
+    audio_path = "Data/Dual_Channel/WhatsApp Audio 2020-04-16 at 13.26.55.wav"
+    text = sample_recognize(audio_path)
+    print(text)
 
 if __name__ == "__main__":
     main()
