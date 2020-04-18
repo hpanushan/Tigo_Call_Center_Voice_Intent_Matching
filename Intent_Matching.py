@@ -1,47 +1,56 @@
+import nltk
+from nltk.corpus import stopwords 
+from Lemmatization import lemmatization
+from Stemming import stemming
 
-def intent_matching(entity_list):
+def intent_matching(text):
+    # convert text into lowercase
+    text = text.lower()
+
     # Keywords
-    recharge_issue = ['issue','topup', 'balance','recharge','card','credit','amount','reload',
-                        'card']
-    service_failure = ['failure', 'service','subscribe', 'unsubscribe','alert', 'subscription', 'unsubscription', 
-                        'expire','package', 'data', 'voice','activation','deactivation']                       
-                         # Subscribe/Unsubscribe
-    network_faiulre = ['failure','strength','disconnect','disconnects', 'signal', 'network', 'coverage', 
-                        'coverage', 'connectivity', '2G', '3G', '4G ']
+    # Monthly,daily,charged?
+    recharge_issue = ['balanc','topup','credit','recharg','reload']
+    service_failure = ['activ','deactiv','data','voice','packag','servic','packag','subscrib','unsubscrib','subscript',
+                        'unsubscript','basi','bill','alert']                       
+    network_faiulre = ['speed','slow','2g','3g','4g','network','signal','strength','coverag','poor','nois','disconnect','area']
 
-    # Counts
-    counts = {
-        'recharge_issue' : 0,
-        'service_failure' : 0,
-        'network_faiulre' : 0
-    }
+    ## Convert text to set of words
+    nltk_tokens = nltk.word_tokenize(text)
+    unique_tokens = set(nltk_tokens)
+
+    # Stropwords removal
+    stop_words = set(stopwords.words('english')) 
+
+    filtered_tokens = [w for w in unique_tokens if not w in stop_words] 
+    print(filtered_tokens)
+
+    ## Converting each tokens to root format
+    # Stemming - (originated-->origin , learning-->learn)
+    # Lemmatization - (skills-->skill) (Handles same meaning tokens)
     
+    root_tokens = []
+    print("")
+    for token in filtered_tokens:
+        stemmed = stemming(token)
+        lemmatized = lemmatization(token)
 
-    for entity in entity_list:
-        entity = entity.lower().split()
+        if (stemmed==lemmatized):
+            root_tokens.append(stemmed)
 
-        for i in entity:
-            if i in recharge_issue:
-                counts['recharge_issue'] += 1
-        
-            elif i in service_failure:
-                counts['service_failure'] += 1
+        else:
+            root_tokens.append(stemmed)
 
-            elif i in network_faiulre:
-                counts['network_faiulre'] += 1
-
-            else: pass
-    
-    # Selecting the case with maximum value
-    max_count =  max(counts.values())   
-
-    # Calculating the threshold
-    threshold = max_count * 0.5        
-    
-    # Checking the cases with max value
-    issues = [k for k,v in counts.items() if v >= threshold]
-
-    return issues
+    return root_tokens
 
 
-#print(intent_matching(['recharge_issue','topup','network_failure','signal strength','service','subscribe']))
+text = """
+
+
+hello I am calling to know if my recharge balance
+ thank you but also is there another way that I can check all these balances rather than always calling is there anything I should know that I can check balances
+ okay thank you
+
+
+"""
+
+print(intent_matching(text))

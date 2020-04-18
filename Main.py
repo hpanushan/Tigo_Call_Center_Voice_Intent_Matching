@@ -8,18 +8,19 @@ def main():
     #file_path = 'Data/Dual_Channel/WhatsApp Audio 2020-04-16 at 13.26.55.wav'
     #text = sample_recognize(file_path)
 
-    text = """Hello
-Hello. I am Rixy from Dialog service center. How can I help you.
-Yesterday I activated 399 data package. After that I have lost all my credit balance. Earlier I had 500 credit amount.
-What is your mobile number?
-It is 09811111111.
-Could you give me a moment. Let me check out that.
-Okay
-Sir, your problem is solved now. Now you have the data package.
-What about my credit balance?
-You will get your credit amount as a reload within a hour.
-Ok. Thanks
-Thank you.
+    text = """
+Hello.
+Hello madam. I am David from Dialog customer care. How can I assist you?
+I have an issue with Dialog 4G broadband download speed. It is 680 kbps. So it is too slow and I am very disappointed.
+Sorry sir. We do understand your concern. Can you please tell me your mobile and NIC number?
+Yes sure. Mobile is 07111111111. And NIC is 8717166176271V.
+Please wait a moment to check this issue.
+Yes sure.
+Thanks for waiting sir. It seems to be a network issue. Now our team is working on this matter. We are really sorry for the experience you are having. 
+When is the estimated date that this will be fixed?
+Sorry sir. It takes time to fix. We already escalate this to relevant. Please bare with us till we provide you the best service.
+Okay.
+Thank for calling. Have a nice day.
 
 
 

@@ -1,9 +1,10 @@
-from nltk.stem import PorterStemmer 
-from nltk.tokenize import word_tokenize 
+from nltk.stem.snowball import SnowballStemmer
 
-def stemming(Word):
+def stemming(word):
 
-    ps = PorterStemmer() 
+    stemmer = SnowballStemmer("english")
 
-    return ps.stem(Word)
+    return stemmer.stem(word)
+
+#print(stemming("disconnects"))
 
