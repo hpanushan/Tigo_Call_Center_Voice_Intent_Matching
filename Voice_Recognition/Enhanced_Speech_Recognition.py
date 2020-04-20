@@ -70,10 +70,11 @@ def sample_recognize(local_file_path):
 # [END speech_transcribe_enhanced_model]
 
 
-def main():
-    audio_path = "Data/Dual_Channel/Service_Failure/Recording (18)-2.wav"
-    text = sample_recognize(audio_path)
-    print(text)
+#def main():
+    #audio_path = "Data/Dual_Channel/Service_Failure/Recording (29)-2.wav"
+#    audio_path = "C:/Users/Anushan Temp/Desktop/Recordings/Recharge_Issue_01.wav"
+#    text = sample_recognize(audio_path)
+#    print(text)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()

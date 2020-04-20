@@ -1,6 +1,6 @@
 from pydub import AudioSegment
 
-name = "Recording (18)"
+name = "Recording (29)"
 path = "D:\OneDrive - Wavenet International (Pvt.) Ltd\Repos\Tigo_Call_Center_Voice_Intent_Matching\Data\Dual_Channel\Service_Failure\{}.wav".format(name)
 point = 50000
 

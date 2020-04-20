@@ -3,6 +3,10 @@ from nltk.corpus import stopwords
 from Lemmatization import lemmatization
 from Stemming import stemming
 
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
+
 def intent_matching(text):
     # convert text into lowercase
     text = text.lower()
@@ -15,11 +19,12 @@ def intent_matching(text):
     }
 
     # Keywords
-    # Monthly,daily,charged?
-    recharge_issue = ['balanc','topup','credit','recharg','reload']
+    # Monthly,daily,charged,account?
+    recharge_issue = ['balanc','topup','credit','recharg','reload','exceed','money','amount','card','payment','bank']
     service_failure = ['activ','deactiv','data','voice','packag','servic','packag','subscrib','unsubscrib','subscript',
-                        'unsubscript','basi','bill','alert']                       
-    network_faiulre = ['speed','slow','2g','3g','4g','network','signal','strength','coverag','poor','nois','disconnect','area']
+                        'unsubscript','basi','bill','alert','regist','unregist','overcharg','expir']                       
+    network_faiulre = ['speed','slow','2g','3g','4g','network','signal','strength','coverag','poor','nois','disconnect',
+                        'area','internet','load','connect','slowdown']
 
     ## Convert text to set of words
     nltk_tokens = nltk.word_tokenize(text)
@@ -45,7 +50,7 @@ def intent_matching(text):
 
         else:
             root_tokens.append(stemmed)
-
+    print(root_tokens)
     # Counting keywords for each intent
     for token in root_tokens:
         if token in recharge_issue:
@@ -66,25 +71,14 @@ def intent_matching(text):
     # Selecting the case with maximum value
     max_count =  max(counts.values())   
 
-    # Calculating the threshold
-    threshold = max_count * 0.5        
+    if max_count==0:
+        return ['Another issue']
+
+    else:
+        # Calculating the threshold
+        threshold = max_count * 0.55        
     
-    # Checking the cases with max value
-    issues = [k for k,v in counts.items() if v >= threshold]
+        # Checking the cases with max value
+        issues = [k for k,v in counts.items() if v >= threshold]
 
-    return issues
-
-
-
-text = """
-
-
-hello hello so my network has been having some issues but I subscribe for a service also few months a few weeks back actually a month ago and but I expected it to work but then after the first few days it doesn't work I don't get any notifications regards to that can you please look into this yeah my my number is 07762 411 that is correct yes can you please check on it online
- yeah the network issue is very common in this area but yeah just I need this subscription sorted for now because God that is the most easiest thing that affects at this time because you know network is much more Hardware rather than software so I'm okay thank you thank you
-
-
-
-
-"""
-
-print(intent_matching(text))
+        return issues

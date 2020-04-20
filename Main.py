@@ -1,38 +1,43 @@
-from Entities_Recognition.Entities_Recognition import sample_analyze_entities
 from Voice_Recognition.Enhanced_Speech_Recognition import sample_recognize
 from Intent_Matching import intent_matching
+from MySQL_DB.MySQLClient import MySQLClient
 
 def main():
     
     # Pass the recording to Google speech to text API
     #file_path = 'Data/Dual_Channel/WhatsApp Audio 2020-04-16 at 13.26.55.wav'
     #text = sample_recognize(file_path)
+    file_name = 'Recording (12)'
 
-    text = """
-Hello.
-Hello madam. I am David from Dialog customer care. How can I assist you?
-I have an issue with Dialog 4G broadband download speed. It is 680 kbps. So it is too slow and I am very disappointed.
-Sorry sir. We do understand your concern. Can you please tell me your mobile and NIC number?
-Yes sure. Mobile is 07111111111. And NIC is 8717166176271V.
-Please wait a moment to check this issue.
-Yes sure.
-Thanks for waiting sir. It seems to be a network issue. Now our team is working on this matter. We are really sorry for the experience you are having. 
-When is the estimated date that this will be fixed?
-Sorry sir. It takes time to fix. We already escalate this to relevant. Please bare with us till we provide you the best service.
-Okay.
-Thank for calling. Have a nice day.
-
-
-
-"""
-
-    # Getting entities from text 
-    entity_list = sample_analyze_entities(text)
+    file_path = "Data/Dual_Channel/Service_Failure/{}.wav".format(file_name)
+    text = sample_recognize(file_path)
     
-    # Getting correct intent from set of entities
-    issues = intent_matching(entity_list)
+    # Getting correct intent from text
+    issues = intent_matching(text)
 
-    print(issues)
+    # Creating Database instance
+    dbObj = MySQLClient('146.148.85.146','root','Omnibis.1234','speech')
+
+    # Table records
+    rechargeissue = '0'
+    networkissue = '0'
+    serviceissue = '0'
+    other = '0'
+
+
+    if issues[0] == 'recharge_issue':
+        rechargeissue = '1'
+    elif issues[0] == 'network_faiulre':
+        networkissue = '1'
+    elif issues[0] == 'service_failure':
+        serviceissue = '1'
+    else:
+        other = '1'
+
+    # Inserting new data
+    dbObj.insertData('results',file_name,rechargeissue,networkissue,serviceissue,other)
+
+    
 
 if __name__ == "__main__":
     main()
