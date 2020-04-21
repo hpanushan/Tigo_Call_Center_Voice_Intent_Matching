@@ -29,8 +29,8 @@ from google.cloud import speech_v1
 import io
 
 
-def sample_recognize(local_file_path,folder_name,file_name):
-    print("""Passing voice clip "{}" of "{}" to Google voice to text API.......""".format(file_name,folder_name))
+def sample_recognize(local_file_path,file_name):
+    print("""Passing voice clip "{}" to Google voice to text API.......""".format(file_name))
     """
     Transcribe a short audio file using an enhanced model
     Args:

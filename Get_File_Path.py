@@ -12,22 +12,22 @@ def get_file_path():
             file_name = 'Network_Failure_0{}'.format(file_number)
         else:
             file_name = 'Network_Failure_{}'.format(file_number)
-        return folder_name,file_name
 
-    elif int(file_number) == 2:
+    elif int(folder_number) == 2:
         folder_name = 'Recharge_Issue'
         if int(file_number)<10:
             file_name = 'Recharge_Issue_0{}'.format(file_number)
         else:
             file_name = 'Recharge_Issue_{}'.format(file_number)
-        return folder_name,file_name
 
-    elif int(file_number) == 3:
+    elif int(folder_number) == 3:
         folder_name = 'Service_Failure'
         file_name = 'Recording ({})'.format(file_number)
-        return folder_name,file_name
 
     else:
         print("Inputs are wrong")
+
+    return folder_name,file_name
+
 
     
