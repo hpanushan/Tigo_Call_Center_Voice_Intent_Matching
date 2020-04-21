@@ -8,6 +8,7 @@ from Stemming import stemming
 #nltk.download('wordnet')
 
 def intent_matching(text):
+    print("Running intent matching feature......")
     # convert text into lowercase
     text = text.lower()
 
@@ -50,7 +51,7 @@ def intent_matching(text):
 
         else:
             root_tokens.append(stemmed)
-    print(root_tokens)
+    
     # Counting keywords for each intent
     for token in root_tokens:
         if token in recharge_issue:
@@ -64,7 +65,7 @@ def intent_matching(text):
 
         else: pass
 
-
+    print("Counting number of keywords for each intent")
     # Sorting dictionary by its value
     counts = {k: v for k, v in sorted(counts.items(), key=lambda item: item[1], reverse=True)}
     
