@@ -1,7 +1,6 @@
 from Voice_Recognition.Enhanced_Speech_Recognition import sample_recognize
 from Intent_Matching import intent_matching
-from MySQL_DB.MySQLClient import MySQLClient
-from Get_File_Path import *
+from MySQL_DB.MySQL_Results import MySQL_Results
 from Get_File_Name import *
 from Move_File import *
 
@@ -27,18 +26,18 @@ def main():
         #dbObj = MySQLClient('146.148.85.146','root','Omnibis.1234','speech')
 
         # Table records
-        rechargeissue = '0'
-        networkissue = '0'
-        serviceissue = '0'
+        recharge_issue = '0'
+        network_issue = '0'
+        service_issue = '0'
         other = '0'
 
 
         if issues[0] == 'recharge_issue':
-            rechargeissue = '1'
+            recharge_issue = '1'
         elif issues[0] == 'network_faiulre':
-            networkissue = '1'
+            network_issue = '1'
         elif issues[0] == 'service_failure':
-            serviceissue = '1'
+            service_issue = '1'
         else:
             other = '1'
 
