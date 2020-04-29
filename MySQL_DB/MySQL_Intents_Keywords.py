@@ -100,5 +100,5 @@ class MySQL_Results:
             columns.append(i[0])
         return columns
 
-dbObj = MySQL_Results('146.148.85.146','root','Omnibis.1234','speech')
-print(dbObj.get_column_names('keywords'))
+#dbObj = MySQL_Results('146.148.85.146','root','Omnibis.1234','speech')
+#print(dbObj.get_column_names('keywords'))
