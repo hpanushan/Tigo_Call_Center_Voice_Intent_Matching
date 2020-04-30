@@ -1,6 +1,6 @@
 import mysql.connector
 
-class MySQL_Results:
+class MySQL_Intents_Keywords:
 
     def __init__(self, host, user, password, database):
         self.host = host
