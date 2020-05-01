@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="093666af-98c1-4abd-8993-230b44ec7c9b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Post_Request.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.py" beforeDir="false" afterPath="$PROJECT_DIR$/App.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MySQL_DB/MySQL_Intents_Keywords.py" beforeDir="false" afterPath="$PROJECT_DIR$/MySQL_DB/MySQL_Intents_Keywords.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
