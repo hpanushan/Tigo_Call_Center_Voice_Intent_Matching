@@ -71,10 +71,10 @@ class MySQL_Intents_Keywords:
         cursor.execute(query)
         return cursor.fetchall()
 
-    def add_new_coulumn(self,table_name,column_name,data_type):
+    def add_new_coulumn(self,table_name,column_name):
         # Add new column to existing table
         cursor = self.connection.cursor()
-        query = """ALTER TABLE {} ADD {} {};""".format(table_name,column_name,data_type)
+        query = """ALTER TABLE {} ADD {} VARCHAR(30);""".format(table_name,column_name)
         # Execute the query
         cursor.execute(query)
         print("New column is added successfully")
@@ -99,6 +99,7 @@ class MySQL_Intents_Keywords:
         for i in data:
             columns.append(i[0])
         return columns
+
 
 #dbObj = MySQL_Results('146.148.85.146','root','Omnibis.1234','speech')
 #print(dbObj.get_column_names('keywords'))
