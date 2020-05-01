@@ -7,12 +7,12 @@ from MySQL_DB.MySQL_Intents_Keywords import *
 app = Flask(__name__)
 api = Api(app)
 
-class Intent(Resource):
+class Intents(Resource):
     def get(self):
         # Get the current intent names
         # Instantiate DB access object
         db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-        intents = db_obj.get_column_names('keywords')
+        intents = db_obj.get_table_names()
         return {"keywords":intents}, 200
 
 
@@ -31,14 +31,14 @@ class Update(Resource):
         # Instantiate DB access object
         db_obj = MySQL_Intents_Keywords('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
 
-        # Remove existing keywords for given intent
-        db_obj.drop_column('keywords',intent_name)
+        # Remove existing keywords table for given intent
+        db_obj.drop_table(intent_name)
 
-        # Adding a new column
-        db_obj.add_new_coulumn('keywords',intent_name)
+        # Create a new table for the intent
+        db_obj.create_table('speech',intent_name)
 
         # Adding new keywords
-        db_obj.insert_data('keywords',intent_name,keywords)
+        db_obj.insert_data(intent_name,keywords)
 
         return 1, 201
 
@@ -57,17 +57,17 @@ class New(Resource):
         # Instantiate DB access object
         db_obj = MySQL_Intents_Keywords('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
 
-        # Create a new column
-        db_obj.add_new_coulumn('keywords',intent_name)
+        # Create a new table for new intent
+        db_obj.create_table('speech',intent_name)
 
         # Add keywords
-        db_obj.insert_data('keywords',intent_name,keywords)
+        db_obj.insert_data(intent_name,keywords)
 
         return 1, 201
 
 
 # Routes
-api.add_resource(Intent,'/intent')
+api.add_resource(Intents,'/intents')
 api.add_resource(Update,'/update')
 api.add_resource(New,'/new')
 

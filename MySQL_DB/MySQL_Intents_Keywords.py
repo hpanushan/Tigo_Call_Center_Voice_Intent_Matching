@@ -76,7 +76,7 @@ class MySQL_Intents_Keywords:
     def drop_table(self,table_name):
         # Drop existing table from database
         cursor = self.connection.cursor()
-        query = """DEOP TABLE IF EXISTS {};""".format(table_name)
+        query = """DROP TABLE IF EXISTS {};""".format(table_name)
         # Execute the query
         cursor.execute(query)
         print("Table is dropped successfully")
