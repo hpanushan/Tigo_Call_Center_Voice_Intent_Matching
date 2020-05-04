@@ -10,13 +10,13 @@ def postRequest(APIEndpoint,JSONData):
 
 # Attributes
 #APIEndpoint = 'http://35.232.85.245:5000/preparation'
-#data = {'checked_t': ["Recharge_Issue_01.wav",] ,'checked_v': ["Network_Failure_01.wav"], 'move_to_voice_clips': 'true'}
+#data = {'checked_t': ["Recording (2).wav",] ,'checked_v': ["Network_Failure_01.wav"], 'move_to_voice_clips': 'true'}
 
 
-#APIEndpoint = 'http://35.232.85.245:5000/execute'
-#data = {'file_name': "Recharge_Issue_01.wav"}
-#json_data = json.dumps(data)
+APIEndpoint = 'http://35.232.85.245:5000/execute'
+data = {'file_name': "Recording (2).wav"}
+json_data = json.dumps(data)
 
-#res = postRequest(APIEndpoint,json_data)
+res = postRequest(APIEndpoint,json_data)
 
-#print(res)
+print(res)

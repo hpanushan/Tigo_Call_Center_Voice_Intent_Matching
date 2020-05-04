@@ -19,8 +19,6 @@ def main(file_name):
     issues = intent_matching(text)
     print("Correct intent for voice clip is received")
     print(issues)
-    # Creating Database instance
-    #dbObj = MySQLClient('146.148.85.146','root','Omnibis.1234','speech')
 
     # Table records
     network_issue = '0'
@@ -37,9 +35,11 @@ def main(file_name):
     else:
         other = '1'
 
+    # Creating Database instance
+    db_obj = MySQL_Results('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
     # Inserting new data
     print("Inserting new data into the database....")
-    #dbObj.insertData('results',get_new_file_name,rechargeissue,networkissue,serviceissue,other)
+    db_obj.insertData('results',file_name,network_issue,recharge_issue,service_issue,other)
 
     # Moving the file to done
     move_file(current_folder_path,new_folder_path,file_name)

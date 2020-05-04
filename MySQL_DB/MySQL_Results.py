@@ -56,15 +56,15 @@ class MySQL_Results:
                         other BINARY NOT NULL);""".format(db_name,table_name))
         print('{} Table creating is successful'.format(table_name))
 
-    def insert_data(self,table_name,file_name,recharge_issue,network_issue,service_issue,other):
+    def insert_data(self,table_name,file_name,network_issue,recharge_issue,service_issue,other):
         # Entering data to the table
         cursor = self.connection.cursor()
         # Execute the query
-        query = """INSERT INTO `{}` (filename,rechargeissue,networkissue,serviceissue,other) VALUES (%s,%s,%s,%s,%s));""".format(table_name)
-        val = (file_name,recharge_issue,network_issue,service_issue,other)
-
+        query = """INSERT INTO `{}` (filename,networkissue,rechargeissue,serviceissue,other) VALUES (%s,%s,%s,%s,%s);""".format(table_name)
+        val = (file_name,network_issue,recharge_issue,service_issue,other)
+        cursor.execute(query, val)
         self.connection.commit()
-        cursor.execute(query,val)
+
         print("Record is entered successfully")
 
 #dbObj = MySQL_Results('146.148.85.146','root','Omnibis.1234','speech')

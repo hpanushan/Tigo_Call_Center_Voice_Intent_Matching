@@ -23,10 +23,9 @@ def intent_matching(text):
 
     # Keywords
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-    network_issue = db_obj.read_data_from_table('speech','network_issue')
-    recharge_issue = db_obj.read_data_from_table('speech','recharge_issue')
-    service_issue = db_obj.read_data_from_table('speech','service_issue')
-
+    network_issue = db_obj.read_column_data('network_issue')
+    recharge_issue = db_obj.read_column_data('recharge_issue')
+    service_issue = db_obj.read_column_data('service_issue')
 
     ## Convert text to set of words
     nltk_tokens = nltk.word_tokenize(text)
