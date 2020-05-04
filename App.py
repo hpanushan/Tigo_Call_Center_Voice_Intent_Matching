@@ -4,6 +4,8 @@ import json
 
 from MySQL_DB.MySQL_Intents_Keywords import *
 from Get_File_Names import get_file_names
+from Move_File import move_file
+from Main import main
 
 app = Flask(__name__)
 api = Api(app)
@@ -66,7 +68,7 @@ class New(Resource):
 
         return 1, 201
 
-class Execute(Resource):
+class Preparation(Resource):
     def get(self):
         # Get the file names in test_voice_clips and voice_clips folder
         # Check the files inside the test-voice-clips folder
@@ -79,11 +81,62 @@ class Execute(Resource):
 
         return {"test-voice-clips": files_in_test_voice_clips, "voice-clips": files_in_voice_clips}, 200
 
+    def post(self):
+        # Getting Post data
+        post_json = request.get_json()
+
+        # Convert JSON into Dictionary
+        post_dict = json.loads(post_json)
+
+        # Key values of post data
+        checked_in_test_voice_clips = post_dict['checked_t']
+        checked_in_voice_clips = post_dict['checked_v']
+        operation = post_dict['move_to_voice_clips']
+
+        if operation == 'true':
+            # Moving files to voice-clips folder
+            for file in checked_in_test_voice_clips:
+                current_folder_path = '/opt/test-voice-clips'
+                new_folder_path = '/opt/voice-clips'
+                move_file(current_folder_path,new_folder_path,file)
+        else:
+            # Moving files to test-voice-clips folder
+            for file in checked_in_voice_clips:
+                current_folder_path = '/opt/voice-clips'
+                new_folder_path = '/opt/test-voice-clips'
+                move_file(current_folder_path, new_folder_path, file)
+
+        # Check the files inside the test-voice-clips folder
+        path1 = "/opt/test-voice-clips"
+        files_in_test_voice_clips = get_file_names(path1)
+
+        # Check the files inside the voice-clips folder
+        path2 = "/opt/voice-clips"
+        files_in_voice_clips = get_file_names(path2)
+
+        return {"test-voice-clips": files_in_test_voice_clips, "voice-clips": files_in_voice_clips}, 201
+
+class Execute(Resource):
+    def post(self):
+        # Getting Post data
+        post_json = request.get_json()
+
+        # Convert JSON into Dictionary
+        post_dict = json.loads(post_json)
+
+        # Key values of post data
+        file_name = post_dict['file_name']
+
+        text = main(file_name)
+
+        return {"text": text, "status": "successfull"}, 201
+
 
 # Routes
 api.add_resource(Intents,'/intents')
 api.add_resource(Update,'/update')
 api.add_resource(New,'/new')
+api.add_resource(Preparation,'/preparation')
 api.add_resource(Execute,'/execute')
 
 if __name__ == '__main__':

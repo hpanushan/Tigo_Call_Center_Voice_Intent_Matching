@@ -9,9 +9,14 @@ def postRequest(APIEndpoint,JSONData):
     return responseText
 
 # Attributes
-#APIEndpoint = 'http://127.0.0.1:5000/new'
-#data = {'intent_name':'service_issue','keywords':['activ', 'deactiv', 'packag']}
+#APIEndpoint = 'http://35.232.85.245:5000/preparation'
+#data = {'checked_t': ["Network_Failure_01.wav",] ,'checked_v': ["Network_Failure_01.wav"], 'move_to_voice_clips': 'true'}
+
+
+#PIEndpoint = 'http://35.232.85.245:5000/execute'
+#data = {'file_name': "Network_Failure_01.wav"}
 #json_data = json.dumps(data)
 
 #res = postRequest(APIEndpoint,json_data)
 
+#print(res)
