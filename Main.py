@@ -1,7 +1,7 @@
 from Voice_Recognition.Enhanced_Speech_Recognition import sample_recognize
 from Intent_Matching import intent_matching
 from MySQL_DB.MySQL_Results import MySQL_Results
-from Get_File_Name import *
+from Get_File_Names import *
 from Move_File import *
 
 def main():
@@ -11,7 +11,7 @@ def main():
     new_folder_path = 'C:/Users/Anushan Temp/Desktop/New folder (2)/done'
 
     try:
-        new_file_name = get_file_name(current_folder_path)
+        new_file_name = get_file_name(current_folder_path)[0]
 
         file_path = current_folder_path + '/' + new_file_name
 
