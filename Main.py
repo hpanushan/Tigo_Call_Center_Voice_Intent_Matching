@@ -23,17 +23,16 @@ def main(file_name):
     #dbObj = MySQLClient('146.148.85.146','root','Omnibis.1234','speech')
 
     # Table records
-    recharge_issue = '0'
     network_issue = '0'
+    recharge_issue = '0'
     service_issue = '0'
     other = '0'
 
-
-    if issues[0] == 'recharge_issue':
-        recharge_issue = '1'
-    elif issues[0] == 'network_faiulre':
+    if issues[0] == 'network_issue':
         network_issue = '1'
-    elif issues[0] == 'service_failure':
+    elif issues[0] == 'recharge_issue':
+        recharge_issue = '1'
+    elif issues[0] == 'service_issue':
         service_issue = '1'
     else:
         other = '1'

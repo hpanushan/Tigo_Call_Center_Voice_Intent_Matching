@@ -3,6 +3,8 @@ from nltk.corpus import stopwords
 from Lemmatization import lemmatization
 from Stemming import stemming
 
+from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
+
 #nltk.download('punkt')
 #nltk.download('stopwords')
 #nltk.download('wordnet')
@@ -14,18 +16,17 @@ def intent_matching(text):
 
     # Counts
     counts = {
+        'network_issue' : 0,
         'recharge_issue' : 0,
-        'service_failure' : 0,
-        'network_faiulre' : 0
+        'service_issue' : 0
     }
 
     # Keywords
-    # Monthly,daily,charged,account?
-    recharge_issue = ['balanc','topup','credit','recharg','reload','exceed','money','amount','card','payment','bank']
-    service_failure = ['activ','deactiv','data','voice','packag','servic','packag','subscrib','unsubscrib','subscript',
-                        'unsubscript','basi','bill','alert','regist','unregist','overcharg','expir']                       
-    network_faiulre = ['speed','slow','2g','3g','4g','network','signal','strength','coverag','poor','nois','disconnect',
-                        'area','internet','load','connect','slowdown']
+    db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    network_issue = db_obj.read_data_from_table('speech','network_issue')
+    recharge_issue = db_obj.read_data_from_table('speech','recharge_issue')
+    service_issue = db_obj.read_data_from_table('speech','service_issue')
+
 
     ## Convert text to set of words
     nltk_tokens = nltk.word_tokenize(text)
@@ -54,14 +55,14 @@ def intent_matching(text):
     
     # Counting keywords for each intent
     for token in root_tokens:
-        if token in recharge_issue:
+        if token in network_issue:
+            counts['network_issue'] += 1
+
+        elif token in recharge_issue:
             counts['recharge_issue'] += 1
         
-        elif token in service_failure:
-            counts['service_failure'] += 1
-
-        elif token in network_faiulre:
-            counts['network_faiulre'] += 1
+        elif token in service_issue:
+            counts['service_issue'] += 1
 
         else: pass
 

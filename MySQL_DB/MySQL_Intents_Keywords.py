@@ -101,6 +101,8 @@ class MySQL_Intents_Keywords:
 #dbObj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
 #dbObj.insert_data('service_issue',['deactiv','activ','packag'])
 #dbObj.create_table('speech','service_issue')
+#dbObj.create_table('speech','recharge_issue')
+
 #print(dbObj.read_column_data('service_issue'))
 #dbObj.drop_table('keywords')
 #print(dbObj.get_table_names())
