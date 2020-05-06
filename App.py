@@ -7,8 +7,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-    intent_names = db_obj.get_table_names()
+    #db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    #intent_names = db_obj.get_table_names()
+    intent_names = ['add','adada','dadd']
     return render_template('index.html',intents=intent_names)
 
 @app.route('/update')
@@ -73,4 +74,4 @@ def update_submit():
     return render_template('update.html')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port="5000",debug=True)
+    app.run(host="127.0.0.1",port="5000",debug=True)

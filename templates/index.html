@@ -47,16 +47,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown button
+                <!-- Example single danger button -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Intent List
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu">
                         {% for intent in intents %}
-                            <a class="dropdown-item" href="#">{{ intent }}</a>
+                        <a class="dropdown-item" href="#">{{ intent }}</a>
                         {% endfor %}
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
