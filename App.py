@@ -14,15 +14,24 @@ def main():
 
 @app.route('/update')
 def update():
-    return render_template('update.html')
+    #db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    #intent_names = db_obj.get_table_names()
+    intent_names = ['add','adada','dadd']
+    return render_template('update.html',intents=intent_names)
 
 @app.route('/new')
 def new():
-    return render_template('new.html')
+    #db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    #intent_names = db_obj.get_table_names()
+    intent_names = ['add','adada','dadd']
+    return render_template('new.html',intents=intent_names)
 
 @app.route('/execute')
 def execute():
-    return render_template('execute.html')
+    #db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    #intent_names = db_obj.get_table_names()
+    intent_names = ['add','adada','dadd']
+    return render_template('execute.html',intents=intent_names)
 
 @app.route('/new_submit', methods=['POST'])
 def new_submit():
