@@ -11,6 +11,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+    <style>
+        form {
+            width: 800px;
+            border: 1px solid black;
+            padding: 25px;
+            margin: 10px;
+        }
+
+        .required:after {
+            content:" *";
+            color: red;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -34,6 +48,27 @@
             </form>
         </div>
     </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <form>
+                    <h2>New Intent</h2>
+                    <h1></h1>
+                    <div class="form-group border-style">
+                        <label for="intent" class="required">Intent Name</label>
+                        <input type="text" class="form-control" id="intentname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment" class="required">Key Words</label>
+                        <textarea class="form-control" rows="5" id="keywords" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <h1></h1>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 
