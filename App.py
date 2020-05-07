@@ -74,7 +74,10 @@ def new_submit():
     db_obj.create_table('speech',table_name)
     db_obj.insert_data(table_name,keywords)
 
-    return render_template('new.html')
+    # Getting current stored intents
+    intent_names = db_obj.get_table_names()
+
+    return render_template('submitted_intent.html',intents=intent_names)
 
 @app.route('/update_submit', methods=['POST'])
 def update_submit():
@@ -100,7 +103,10 @@ def update_submit():
     db_obj.create_table('speech',table_name)
     db_obj.insert_data(table_name,keywords)
 
-    return render_template('update.html')
+    # Getting current stored intents
+    intent_names = db_obj.get_table_names()
+
+    return render_template('submitted_intent.html',intents=intent_names)
 
 @app.route('/execute_submit', methods=['POST'])
 def execute_submit():
@@ -117,7 +123,11 @@ def execute_submit():
     # Running main application to process 
     main(file_name)
 
-    return render_template('index.html')
+    # Getting current stored intents
+    db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
+    intent_names = db_obj.get_table_names()
+
+    return render_template('executed.html',intents=intent_names)
 
 
 if __name__ == '__main__':
