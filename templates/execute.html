@@ -60,15 +60,12 @@
 		  <form>
 		    <div class="form-group">
 			    <select multiple id="exampleInputEmail1" name="duallistbox_demo1[]">
-				    <option>Option 1</option>
-				    <option selected>Option 2</option>
-				    <option>Option 3</option>
-				    <option>Option 4</option>
-				    <option selected>Option 5</option>
-				    <option>Option 6</option>
-				    <option>Option 7</option>
-				    <option>Option 8</option>
-				    <option>Option 9</option>
+            {% for file in test_voice_clips %}
+              <option>{{file}}</option>
+            {% endfor %}
+				    {% for file in voice_clips %}
+              <option selected>{{file}}</option>
+            {% endfor %}
 			    </select>
 		    </div>
 		    <button type="submit" class="btn btn-primary">Submit</button>
