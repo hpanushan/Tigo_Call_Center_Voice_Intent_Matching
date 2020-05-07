@@ -3,11 +3,22 @@ from flask import Flask, render_template, url_for, request
 from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
 from Create_Table_Name import create_table_name
 from Get_File_Names import get_file_names
+from Move_File import move_file
+from Main import main
 
 app = Flask(__name__)
 
 @app.route('/')
-def main():
+def index():
+    # Attributes
+    old_path = "/opt/voice-clips"
+    new_path = "/opt/test-voice-clips"
+
+    # Clear voice-clips folder
+    file_names_in_voice_clips = get_file_names(old_path)
+    for file in file_names_in_voice_clips:
+        move_file(old_path,new_path,file)
+
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
     #intent_names = ['add','adada','dadd']
@@ -90,6 +101,24 @@ def update_submit():
     db_obj.insert_data(table_name,keywords)
 
     return render_template('update.html')
+
+@app.route('/execute_submit', methods=['POST'])
+def execute_submit():
+    # Attributes
+    old_path = "/opt/test-voice-clips"
+    new_path = "/opt/voice-clips"
+
+    # Getting selected file name
+    file_name = request.form['duallistbox_demo1[]']
+    
+    # Move the selected file to voice clips folder
+    move_file(old_path,new_path,file_name)
+
+    # Running main application to process 
+    main(file_name)
+
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port="5000",debug=True)

@@ -57,9 +57,9 @@
     <p><br/></p>
 	
 	  <div class="container">
-		  <form>
+		  <form action="{{ url_for('execute_submit') }}" method="post">
 		    <div class="form-group">
-			    <select multiple id="exampleInputEmail1" name="duallistbox_demo1[]">
+			    <select multiple id="duallistbox_demo1[]" name="duallistbox_demo1[]" required>
             {% for file in test_voice_clips %}
               <option>{{file}}</option>
             {% endfor %}
