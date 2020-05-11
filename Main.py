@@ -16,41 +16,50 @@ def main(file_name):
 
     file_path = current_folder_path + '/' + file_name
 
-    text = sample_recognize(file_path,file_name)
-    logging.info("text is received from Speech API")
+    try:
+        text = sample_recognize(file_path,file_name)
 
-    # Getting correct intent from text
-    issues = intent_matching(text)
-    logging.info("intents are received for clip")
-    logging.info("matched intent - " + issues[0])
+        logging.info("text is received from Speech API")
 
-    # Table records
-    network_issue = '0'
-    recharge_issue = '0'
-    service_issue = '0'
-    other = '0'
+        # Getting correct intent from text
+        issues = intent_matching(text)
+        logging.info("intents are received for clip")
+        logging.info("matched intent - " + issues[0])
 
-    logging.info("preparing row data in binary table")
-    if issues[0] == 'network_issue':
-        network_issue = '1'
-    elif issues[0] == 'recharge_issue':
-        recharge_issue = '1'
-    elif issues[0] == 'service_issue':
-        service_issue = '1'
-    else:
-        other = '1'
+        # Table records
+        network_issue = '0'
+        recharge_issue = '0'
+        service_issue = '0'
+        other = '0'
 
-    # Creating Database instance
-    db_obj = MySQL_Results('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
-    # Inserting new data
-    db_obj.insert_data('results',file_name,network_issue,recharge_issue,service_issue,other)
+        logging.info("preparing row data in binary table")
+        if issues[0] == 'network_issue':
+            network_issue = '1'
+        elif issues[0] == 'recharge_issue':
+            recharge_issue = '1'
+        elif issues[0] == 'service_issue':
+            service_issue = '1'
+        else:
+            other = '1'
 
-    db_obj.close_connection()
+        # Creating Database instance
+        db_obj = MySQL_Results('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
+        # Inserting new data
+        db_obj.insert_data('results',file_name,network_issue,recharge_issue,service_issue,other)
 
-    # Moving the file to done
-    move_file(current_folder_path,new_folder_path,file_name)
+        db_obj.close_connection()
 
-    return text
+        # Moving the file to done
+        move_file(current_folder_path,new_folder_path,file_name)
+
+        return text
+        
+    except Exception as e:
+        logging.info(e)
+    
+    
+
+    
 
     
 
