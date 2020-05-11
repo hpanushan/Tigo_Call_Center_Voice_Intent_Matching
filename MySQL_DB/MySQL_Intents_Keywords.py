@@ -5,7 +5,6 @@ class MySQL_Intents_Keywords:
 
     def __init__(self, host, user, password, database):
         logging.info("mysql intents keywords constructor")
-        logging.info(host,user,password,database)
 
         self.host = host
         self.user = user
@@ -31,7 +30,7 @@ class MySQL_Intents_Keywords:
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("USE {};".format(db_name))
-        print('Database entering is successful')
+        logging.info('database entering is successful')
 
     def show_tables(self,db_name):
         # Show tabales inside the database
@@ -48,7 +47,7 @@ class MySQL_Intents_Keywords:
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("""CREATE TABLE IF NOT EXISTS {}.{} (keywords VARCHAR(30) NOT NULL);""".format(db_name,table_name))
-        print('{} Table creating is successful'.format(table_name))
+        logging.info('{} Table creating is successful'.format(table_name))
 
     def insert_data(self,table_name,list_of_records):
         # Entering data to the table
@@ -83,7 +82,7 @@ class MySQL_Intents_Keywords:
         query = """DROP TABLE IF EXISTS {};""".format(table_name)
         # Execute the query
         cursor.execute(query)
-        print("Table is dropped successfully")
+        logging.info("Table is dropped successfully")
 
     def get_table_names(self):
         # Getting column names in a table

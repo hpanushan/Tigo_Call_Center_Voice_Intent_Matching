@@ -5,7 +5,7 @@ class MySQL_Results:
 
     def __init__(self, host, user, password, database):
         logging.info("mysql results constructor")
-        logging.info(host,user,password,database)
+        
         self.host = host
         self.user = user
         self.password = password
@@ -30,7 +30,7 @@ class MySQL_Results:
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("USE {};".format(db_name))
-        print('Database entering is successful')
+        logging.info('database entering is successful')
 
     def show_tables(self,db_name):
         # Show tabales inside the database
@@ -62,7 +62,7 @@ class MySQL_Results:
                         networkissue BINARY NOT NULL,
                         serviceissue BINARY NOT NULL,
                         other BINARY NOT NULL);""".format(db_name,table_name))
-        print('{} Table creating is successful'.format(table_name))
+        logging.info('{} Table creating is successful'.format(table_name))
 
     def insert_data(self,table_name,file_name,network_issue,recharge_issue,service_issue,other):
         # Entering data to the table
@@ -74,7 +74,7 @@ class MySQL_Results:
         cursor.execute(query, val)
         self.connection.commit()
 
-        print("Record is entered successfully")
+        logging.info("record is entered successfully")
 
 #dbObj = MySQL_Results('146.148.85.146','root','Omnibis.1234','speech')
 #dbObj.create_table('speech','results')

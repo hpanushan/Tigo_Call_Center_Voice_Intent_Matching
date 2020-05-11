@@ -32,7 +32,7 @@ def index():
 
 @app.route('/update')
 def update():
-    logger.info('updating new intent route')
+    logger.info('updating intent route')
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
     #intent_names = ['add','adada','dadd']
