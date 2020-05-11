@@ -1,8 +1,10 @@
+import logging
 from os import listdir
 from os.path import isfile, join
 
 def get_file_names(my_path):
     # Getting files name in current dir
+    logging.info("getting file names function")
     only_files = [f for f in listdir(my_path) if isfile(join(my_path, f))]
 
     return only_files

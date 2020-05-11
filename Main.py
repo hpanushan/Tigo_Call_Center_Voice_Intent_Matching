@@ -1,24 +1,28 @@
+import logging
 from Voice_Recognition.Enhanced_Speech_Recognition import sample_recognize
+
 from Intent_Matching import intent_matching
 from MySQL_DB.MySQL_Results import MySQL_Results
-from Get_File_Names import *
-from Move_File import *
+from Get_File_Names import get_file_names
+from Move_File import move_file
 
 def main(file_name):
-    print("Running main function.......")
+    logging.info("main function")
     # Attributes
     current_folder_path = '/opt/voice-clips'
     new_folder_path = '/opt/done'
+    logging.info("current folder path - " + current_folder_path)
+    logging.info("new folder path - " + new_folder_path)
 
     file_path = current_folder_path + '/' + file_name
 
     text = sample_recognize(file_path,file_name)
-    print("Text is recieved from API")
+    logging.info("text is received from Speech API")
 
     # Getting correct intent from text
     issues = intent_matching(text)
-    print("Correct intent for voice clip is received")
-    print(issues)
+    logging.info("intents are received for clip")
+    logging.info("matched intent - " + issues[0])
 
     # Table records
     network_issue = '0'
@@ -26,6 +30,7 @@ def main(file_name):
     service_issue = '0'
     other = '0'
 
+    logging.info("preparing row data in binary table")
     if issues[0] == 'network_issue':
         network_issue = '1'
     elif issues[0] == 'recharge_issue':
@@ -38,7 +43,6 @@ def main(file_name):
     # Creating Database instance
     db_obj = MySQL_Results('146.148.85.146', 'root', 'Omnibis.1234', 'speech')
     # Inserting new data
-    print("Inserting new data into the database....")
     db_obj.insert_data('results',file_name,network_issue,recharge_issue,service_issue,other)
 
     # Moving the file to done

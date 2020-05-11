@@ -9,4 +9,4 @@ def getRequest(APIEndpoint):
 
     return data
 
-print(getRequest('http://35.232.85.245:5000/preparation'))
+#print(getRequest('http://35.232.85.245:5000/preparation'))

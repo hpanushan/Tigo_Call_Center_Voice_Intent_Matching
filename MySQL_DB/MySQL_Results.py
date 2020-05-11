@@ -1,8 +1,11 @@
+import logging
 import mysql.connector
 
 class MySQL_Results:
 
     def __init__(self, host, user, password, database):
+        logging.info("mysql results constructor")
+        logging.info(host,user,password,database)
         self.host = host
         self.user = user
         self.password = password
@@ -15,6 +18,7 @@ class MySQL_Results:
 
     # Queries for databases
     def show_databases(self):
+        logging.info("show databses function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("SHOW DATABASES;")
@@ -22,6 +26,7 @@ class MySQL_Results:
 
     def use_database(self,db_name):
         # Enter to database
+        logging.info("entering database function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("USE {};".format(db_name))
@@ -29,6 +34,7 @@ class MySQL_Results:
 
     def show_tables(self,db_name):
         # Show tabales inside the database
+        logging.info("show tables function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute('USE {};'.format(db_name))
@@ -37,6 +43,7 @@ class MySQL_Results:
 
     def read_data_from_table(self,db_name,table_name):
         # Read data from a table
+        logging.info("read data function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute('SELECT * FROM {}.{};'.format(db_name,table_name))
@@ -44,6 +51,7 @@ class MySQL_Results:
 
     def create_table(self,db_name,table_name):
         # Creating a new table
+        logging.info("create table function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("""CREATE TABLE {}.{} (
@@ -58,6 +66,7 @@ class MySQL_Results:
 
     def insert_data(self,table_name,file_name,network_issue,recharge_issue,service_issue,other):
         # Entering data to the table
+        logging.info("insert data function")
         cursor = self.connection.cursor()
         # Execute the query
         query = """INSERT INTO `{}` (filename,networkissue,rechargeissue,serviceissue,other) VALUES (%s,%s,%s,%s,%s);""".format(table_name)

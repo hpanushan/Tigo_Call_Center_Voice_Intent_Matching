@@ -1,8 +1,12 @@
+import logging
 import mysql.connector
 
 class MySQL_Intents_Keywords:
 
     def __init__(self, host, user, password, database):
+        logging.info("mysql intents keywords constructor")
+        logging.info(host,user,password,database)
+
         self.host = host
         self.user = user
         self.password = password
@@ -15,6 +19,7 @@ class MySQL_Intents_Keywords:
 
     # Queries for databases
     def show_databases(self):
+        logging.info("show databses function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("SHOW DATABASES;")
@@ -22,6 +27,7 @@ class MySQL_Intents_Keywords:
 
     def use_database(self,db_name):
         # Enter to database
+        logging.info("use databse function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("USE {};".format(db_name))
@@ -29,21 +35,16 @@ class MySQL_Intents_Keywords:
 
     def show_tables(self,db_name):
         # Show tabales inside the database
+        logging.info("show tables function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute('USE {};'.format(db_name))
         cursor.execute('SHOW TABLES;')
         return cursor.fetchall()
 
-    def read_data_from_table(self,db_name,table_name):
-        # Read data from a table
-        cursor = self.connection.cursor()
-        # Execute the query
-        cursor.execute('SELECT * FROM {}.{};'.format(db_name,table_name))
-        return cursor.fetchall()
-
     def create_table(self,db_name,table_name):
         # Creating a new table
+        logging.info("create table function")
         cursor = self.connection.cursor()
         # Execute the query
         cursor.execute("""CREATE TABLE IF NOT EXISTS {}.{} (keywords VARCHAR(30) NOT NULL);""".format(db_name,table_name))
@@ -51,6 +52,7 @@ class MySQL_Intents_Keywords:
 
     def insert_data(self,table_name,list_of_records):
         # Entering data to the table
+        logging.info("insert data function")
         cursor = self.connection.cursor()
         for record in list_of_records:
             # Execute the query
@@ -58,10 +60,11 @@ class MySQL_Intents_Keywords:
             cursor.execute(query)
             self.connection.commit()
 
-        print("Records are entered successfully")
+        logging.info("record is entered successfully")
 
     def read_column_data(self,table_name):
         # Reading one column from table
+        logging.info("show databses function")
         cursor = self.connection.cursor()
         query = """SELECT keywords FROM {};""".format(table_name)
         # Execute the query
@@ -75,6 +78,7 @@ class MySQL_Intents_Keywords:
 
     def drop_table(self,table_name):
         # Drop existing table from database
+        logging.info("dropping a table function")
         cursor = self.connection.cursor()
         query = """DROP TABLE IF EXISTS {};""".format(table_name)
         # Execute the query
@@ -83,6 +87,7 @@ class MySQL_Intents_Keywords:
 
     def get_table_names(self):
         # Getting column names in a table
+        logging.info("getting table names function")
         cursor = self.connection.cursor()
         query = """SHOW TABLES;"""
         # Execute the query

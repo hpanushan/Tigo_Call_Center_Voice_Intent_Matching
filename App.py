@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, render_template, url_for, request
 
 from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
@@ -6,10 +7,15 @@ from Get_File_Names import get_file_names
 from Move_File import move_file
 from Main import main
 
+logger = logging.getLogger(__name__)
+# Logging format
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(filename)s %(lineno)d %(message)s')
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    logger.info('main route')
     # Attributes
     old_path = "/opt/voice-clips"
     new_path = "/opt/test-voice-clips"
@@ -26,6 +32,7 @@ def index():
 
 @app.route('/update')
 def update():
+    logger.info('updating new intent route')
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
     #intent_names = ['add','adada','dadd']
@@ -33,6 +40,7 @@ def update():
 
 @app.route('/new')
 def new():
+    logger.info('creating new intent route')
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
     #intent_names = ['add','adada','dadd']
@@ -40,6 +48,7 @@ def new():
 
 @app.route('/execute')
 def execute():
+    logger.info('executing route')
     # Attributes
     path1 = "/opt/test-voice-clips"
     path2 = "/opt/voice-clips"
@@ -55,6 +64,7 @@ def execute():
 
 @app.route('/new_submit', methods=['POST'])
 def new_submit():
+    logger.info('new submit route')
     intent_name = request.form['intentname']
     keywords = request.form['keywords']
 
@@ -81,6 +91,7 @@ def new_submit():
 
 @app.route('/update_submit', methods=['POST'])
 def update_submit():
+    logger.info('update submit route')
     intent_name = request.form['intentname']
     keywords = request.form['keywords']
 
@@ -110,6 +121,7 @@ def update_submit():
 
 @app.route('/execute_submit', methods=['POST'])
 def execute_submit():
+    logger.info('execute submit route')
     # Attributes
     old_path = "/opt/test-voice-clips"
     new_path = "/opt/voice-clips"
