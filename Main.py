@@ -45,6 +45,8 @@ def main(file_name):
     # Inserting new data
     db_obj.insert_data('results',file_name,network_issue,recharge_issue,service_issue,other)
 
+    db_obj.close_connection()
+
     # Moving the file to done
     move_file(current_folder_path,new_folder_path,file_name)
 

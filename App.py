@@ -27,6 +27,9 @@ def index():
 
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
+
+    db_obj.close_connection()
+
     #intent_names = ['add','adada','dadd']
     return render_template('index.html',intents=intent_names)
 
@@ -35,6 +38,9 @@ def update():
     logger.info('updating intent route')
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
+
+    db_obj.close_connection()
+
     #intent_names = ['add','adada','dadd']
     return render_template('update.html',intents=intent_names)
 
@@ -43,6 +49,9 @@ def new():
     logger.info('creating new intent route')
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
+
+    db_obj.close_connection()
+
     #intent_names = ['add','adada','dadd']
     return render_template('new.html',intents=intent_names)
 
@@ -55,6 +64,9 @@ def execute():
 
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
+
+    db_obj.close_connection()
+
     #intent_names = ['add','adada','dadd']
 
     test_voice_clips = get_file_names(path1)
@@ -87,6 +99,8 @@ def new_submit():
     # Getting current stored intents
     intent_names = db_obj.get_table_names()
 
+    db_obj.close_connection()
+
     return render_template('submitted_intent.html',intents=intent_names)
 
 @app.route('/update_submit', methods=['POST'])
@@ -117,6 +131,8 @@ def update_submit():
     # Getting current stored intents
     intent_names = db_obj.get_table_names()
 
+    db_obj.close_connection()
+
     return render_template('submitted_intent.html',intents=intent_names)
 
 @app.route('/execute_submit', methods=['POST'])
@@ -138,6 +154,8 @@ def execute_submit():
     # Getting current stored intents
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
     intent_names = db_obj.get_table_names()
+
+    db_obj.close_connection()
 
     return render_template('executed.html',intents=intent_names)
 

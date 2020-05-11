@@ -28,6 +28,8 @@ def intent_matching(text):
     recharge_issue = db_obj.read_column_data('recharge_issue')
     service_issue = db_obj.read_column_data('service_issue')
 
+    db_obj.close_connection()
+
     ## Convert text to set of words
     logging.info("tokenization")
     nltk_tokens = nltk.word_tokenize(text)

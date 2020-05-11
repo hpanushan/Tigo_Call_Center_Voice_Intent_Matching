@@ -16,6 +16,11 @@ class MySQL_Intents_Keywords:
              database = database,
              auth_plugin='mysql_native_password')
 
+    def close_connection(self):
+        # Closing databse connection
+        logging.info("db connection closing function")
+        self.connection.close()
+
     # Queries for databases
     def show_databases(self):
         logging.info("show databses function")
