@@ -9,8 +9,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='custom.css')}}">
-
 </head>
 
 <body>
@@ -48,9 +46,15 @@
                 <a class="nav-link" href="/execute">Execute</a>
             </li>
           </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </div>
       </nav>
-
+    
+    <p><br/></p>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-10">
