@@ -5,6 +5,8 @@ from Lemmatization import lemmatization
 from Stemming import stemming
 
 from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
+from Create_Issue_Count import create_issue_count
+from Get_Keywords import get_keywords
 
 #nltk.download('punkt')
 #nltk.download('stopwords')
@@ -15,20 +17,11 @@ def intent_matching(text):
     # convert text into lowercase
     text = text.lower()
 
-    # Counts
-    counts = {
-        'network_issue' : 0,
-        'recharge_issue' : 0,
-        'service_issue' : 0
-    }
+    # Counts (dictionary)
+    counts = create_issue_count()
 
-    # Keywords
-    db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-    network_issue = db_obj.read_column_data('network_issue')
-    recharge_issue = db_obj.read_column_data('recharge_issue')
-    service_issue = db_obj.read_column_data('service_issue')
-
-    db_obj.close_connection()
+    # Keywords (dictionary)
+    keywords = get_keywords()
 
     ## Convert text to set of words
     logging.info("tokenization")
@@ -61,16 +54,9 @@ def intent_matching(text):
     # Counting keywords for each intent
     logging.info("counting keywords for each intent")
     for token in root_tokens:
-        if token in network_issue:
-            counts['network_issue'] += 1
-
-        elif token in recharge_issue:
-            counts['recharge_issue'] += 1
-        
-        elif token in service_issue:
-            counts['service_issue'] += 1
-
-        else: pass
+        for i in keywords:
+            if token in keywords[i]:
+                counts[i] = counts[i] + 1
 
     # Sorting dictionary by its value
     logging.info("sorting intents according to keyword counts")
