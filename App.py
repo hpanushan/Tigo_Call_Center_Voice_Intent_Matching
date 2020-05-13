@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 
 from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
 from Create_Table_Name import create_table_name
@@ -157,7 +157,7 @@ def execute_submit():
 
     db_obj.close_connection()
 
-    return render_template('executed.html',intents=intent_names)
+    return redirect("http://35.232.85.245:3000/d/YZaTlh3Zz/voice-clip-intent-matching?orgId=1&refresh=5s", code=302)
 
 
 if __name__ == '__main__':
