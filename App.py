@@ -106,7 +106,7 @@ def new_submit():
 @app.route('/update_submit', methods=['POST'])
 def update_submit():
     logger.info('update submit route')
-    intent_name = request.form['intentname']
+    intent_name = request.form["intent"]
     keywords = request.form['keywords']
 
     # Cleaning the keywords text
@@ -120,7 +120,7 @@ def update_submit():
 
     # Creating database instance
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-
+    
     # Drop existing intent table
     db_obj.drop_table(table_name)
 

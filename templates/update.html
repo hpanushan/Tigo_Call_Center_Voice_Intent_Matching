@@ -54,17 +54,28 @@
       </nav>
     
     <p><br/></p>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-10">
                 <form action="{{ url_for('update_submit') }}" method="post">
                     <h2>Update Intent</h2>
-                    <h1></h1>
+                    <p><br/></p>
+
                     <div class="form-group border-style">
-                        <label for="intentname" class="required">Intent Name</label>
-                        <input type="text" class="form-control" id="intentname" name="intentname" required>
+                      <label for="intentname" class="required">Intent Name</label>
+                      <div class="form-group">
+                        <label class="sr-only" for="rating">Rating for Cafe</label>
+                        <select class="form-control" id="intent" name="intent">
+                          {% for intent in intents%}
+                            <option value="{{ intent }}">{{ intent }}</option>
+                          {% endfor %}
+                      </select>
+                      </div>
                     </div>
+                    
+
+                    <p><br/></p>
                     <div class="form-group">
                         <label for="keywords" class="required">Key Words</label>
                         <textarea class="form-control" rows="5" id="keywords" name="keywords" required></textarea>
@@ -80,6 +91,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <script>
+      $(".dropdown-menu li a").click(function(){
+        $(".btn:first-child").html($(this).text()+' <span class="caret"></span>');
+      });
+    </script>
 
 </body>
 
