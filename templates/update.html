@@ -9,6 +9,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+    #intent {width:300px;}
+    </style>
 </head>
 
 <body>
@@ -65,12 +68,11 @@
                     <div class="form-group border-style">
                       <label for="intentname" class="required">Intent Name</label>
                       <div class="form-group">
-                        <label class="sr-only" for="rating">Rating for Cafe</label>
                         <select class="form-control" id="intent" name="intent">
                           {% for intent in intents%}
                             <option value="{{ intent }}">{{ intent }}</option>
                           {% endfor %}
-                      </select>
+                        </select>
                       </div>
                     </div>
                     
