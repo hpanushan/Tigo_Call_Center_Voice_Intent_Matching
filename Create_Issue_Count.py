@@ -6,7 +6,7 @@ def create_issue_count():
     logging.info("creating issue count fucntion")
     # Keywords
     db_obj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
-    issues = db_obj.get_table_names()
+    issues = db_obj.read_column_data('keywords','intent_name')
 
     db_obj.close_connection()
 
