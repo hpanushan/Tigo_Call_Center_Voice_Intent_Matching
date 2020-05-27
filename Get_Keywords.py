@@ -13,5 +13,6 @@ def get_keywords():
 
     for intent in intents:
         keywords[intent] = db_obj.read_keywords('keywords',intent)
-
+    db_obj.close_connection()
+    
     return keywords
