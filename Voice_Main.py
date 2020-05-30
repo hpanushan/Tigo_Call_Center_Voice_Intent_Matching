@@ -3,8 +3,8 @@ from Voice_Recognition.Enhanced_Speech_Recognition import sample_recognize
 
 from Intent_Matching import intent_matching
 from MySQL_DB.MySQL_Results import MySQL_Results
-from Get_File_Names import get_file_names
-from Move_File import move_file
+from File_Handling.Move_File import move_file
+from File_Handling.Get_File_Size import get_file_size
 
 def voice_main(file_name):
     logging.info("main function")
@@ -16,7 +16,10 @@ def voice_main(file_name):
 
     file_path = current_folder_path + '/' + file_name
 
-    try:
+    # Check file size restriction (10 MB)
+    file_size_in_kb = get_file_size(file_path)
+
+    if file_size_in_kb < 10240:
         text = sample_recognize(file_path,file_name)
 
         logging.info("text is received from Speech API")
@@ -52,8 +55,10 @@ def voice_main(file_name):
         # Moving the file to done
         move_file(current_folder_path,new_folder_path,file_name)
         
-    except Exception as e:
-        logging.info(e)
+        return {'Result': 'Done'}
+
+    else:
+        return {'Result': 'File size exceeded'}
     
     
 

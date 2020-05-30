@@ -6,11 +6,11 @@ import logging
 import json
 
 from MySQL_DB.MySQL_Intents_Keywords import MySQL_Intents_Keywords
-from CSV_File_Read import csv_file_read
-from Get_File_Names import get_file_names
+from File_Handling.CSV_File_Read import csv_file_read
+from File_Handling.Get_File_Names import get_file_names
+from File_Handling.Move_File import move_file
 from Voice_Main import voice_main
 from Text_Main import text_main
-from Move_File import move_file
 
 logger = logging.getLogger(__name__)
 # Logging format
@@ -205,9 +205,9 @@ class files(Resource):       # Class inheritance from Resource (Inject all RestP
 
                 # Apply analysis
                 file_name = 'test.wav'
-                voice_main(file_name)
+                status = voice_main(file_name)
             
-                return {'Result': 'Done'}, 201
+                return status, 201
             else:
                 return {'Error': '!!'}, 500
             
@@ -241,9 +241,9 @@ class Analyse(Resource):       # Class inheritance from Resource (Inject all Res
                 move_file(current_path,new_path,file_name)
 
                 # Analyse text file
-                voice_main(file_name)
+                status = voice_main(file_name)
             
-                return {'Result': 'Done'}, 201
+                return status, 201
             else:
                 return {'Error': '!!'}, 500
 
