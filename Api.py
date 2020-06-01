@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restplus import Api, Resource, fields, abort
+from flask_cors import CORS
 import os
 import werkzeug
 import logging
@@ -17,6 +18,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(filename)s %(lineno)d %(message)s')
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 # Models
