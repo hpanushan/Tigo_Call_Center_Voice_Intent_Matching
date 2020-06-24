@@ -82,14 +82,27 @@ class MySQL_Intents_Keywords:
         cursor.execute(query)
 
         records = cursor.fetchall()
-
+        
         # Convert list of tuples into list of lists
         list_of_lists = [list(elem) for elem in records]
-
+        
         for row in list_of_lists:
             row[-1] = json.dumps(row[-1], indent=4, sort_keys=True, default=str)
         
-        return list_of_lists
+        records = []
+
+        # Creating dictionary
+        for row in list_of_lists:
+            data = {}
+            data['id'] = row[0]
+            data['intent_name'] = row[1]
+            data['keywords'] = row[2]
+            data['description'] = row[3]
+            data['created_by'] = row[4]
+            data['created_on'] = row[5]
+            records.append(data)
+        
+        return records
 
     def remove_row(self,table_name,intent_id):
         # Remove row from table
@@ -162,7 +175,7 @@ class MySQL_Intents_Keywords:
 
 #dbObj = MySQL_Intents_Keywords('146.148.85.146','root','Omnibis.1234','speech')
 #dbObj.insert_data('keywords','test',["11","12"],'lolsss','anushan')
-#print(dbObj.read_data('keywords'))
+#dbObj.read_data('keywords')
 #dbObj.create_table('speech','keywords')
 #dbObj.create_table('speech','recharge_issue')
 #print(dbObj.read_data('keywords'))
